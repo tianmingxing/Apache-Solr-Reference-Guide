@@ -9,3 +9,5 @@
 1. 快速概述：介绍Solr如何工作。
 1. 进一步概述：介绍Solr的主目录和配置选项。
 1. Solr启动脚本概述：介绍 `bin/solr` 脚本可用的所有命令和选项。
+
+> Solr包括一个快速入门教程，如果你刚刚开始使用Solr将很有帮助。你可以在`http://lucene.apache.org/solr/quickstart.html` 中在线查找，也可以在Solr安装目录中找到`$SOLR_INSTALL_DIR/docs/quickstart.html`。
