@@ -4,8 +4,6 @@
 
 ## 翻译自 Apache Solr 6.3
 
-
-
 ### 如何来阅读
 
 * [点击在线阅读](https://xiaoxing598.gitbooks.io/apache-solr-reference-guide/content/)
