@@ -17,14 +17,53 @@ Solr包含一个称为 `bin/solr` 的脚本，它允许你启动和停止Solr，
 * [ZooKeeper操作](#ZooKeeper操作)
  * [上传配置集](#上传配置集)
  * [下载配置集](#下载配置集)
- * [在本地文件和ZooKeeper znode之间复制](#在本地文件和zooKeeper-znode之间复制)
+ * [在本地文件和ZooKeeper znode之间复制](#在本地文件和zookeeper-znode之间复制)
  * [从ZooKeeper中删除znode](#从ZooKeeper中删除znode)
- * [将一个ZooKeeper znode移动到另一个节点（重命名）](#将一个zooKeeper-znode移动到另一个节点（重命名）)
- * [列出ZooKeeper znode的子节点](#列出zooKeeper-znode的子节点)
+ * [将一个ZooKeeper znode移动到另一个节点（重命名）](#将一个zookeeper-znode移动到另一个节点（重命名）)
+ * [列出ZooKeeper znode的子节点](#列出zookeeper-znode的子节点)
  * [创建znode（支持chroot）](#创建znode（支持chroot）)
  
 # 启动和停止
+
 ## 启动和重新启动
+
+`start` 命令启动Solr。`restart` 命令允许你在Solr已经运行或者已经停止时重新启动它。
+
+启动和重新启动命令有几个选项，允许你在SolrCloud模式下运行，使用示例配置集，以非默认的主机名或端口开始，并指向本地ZooKeeper集合。
+
+```
+bin/solr start [options]
+bin/solr start -help
+bin/solr restart [options]
+bin/solr restart -help
+```
+
+当使用 `restart` 命令时，必须传递你在启动Solr时最初传递的所有参数。在后台发出停止请求，因此Solr将在再次启动之前先停止。如果没有节点已在运行，重新启动将跳过停止步骤并继续启动Solr。
+
+### 可用参数
+
+|参数|描述|示例|
+|---|---|----|
+|-a "<string>"|使用其他JVM参数（例如以-X开头的那些参数）启动Solr。如果传递以“-D”开头的JVM参数，则可以省略-a选项。|bin/solr start -a "-Xdebug -Xrunjdwp:transport=dt_socket, server=y,suspend=n,address=1044"|
+|-cloud|在SolrCloud模式下启动Solr，它还将启动Solr附带的嵌入式ZooKeeper实例。|bin/solr start -c|
+||||
+||||
+||||
+||||
+||||
+||||
+||||
+||||
+||||
+
+### 设置Java系统属性
+
+### SolrCloud模式
+
+
+### 使用示例配置运行
+
+
 ## 停止
 # 系统信息
 ## 版本
