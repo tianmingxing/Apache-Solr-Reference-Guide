@@ -8,20 +8,20 @@ Solr包含一个称为 `bin/solr` 的脚本，它允许你启动和停止Solr，
  * [启动和重新启动](#启动和重新启动)
  * [停止](#停止)
 * [系统信息](#系统信息)
- * 版本
- * 状态
- * 健康检查
-* 集合和内核
- * 创建
- * 删除
-* ZooKeeper操作
- * 上传配置集
- * 下载配置集
- * 在本地文件和ZooKeeper znode之间复制
- * 从ZooKeeper中删除znode
- * 将一个ZooKeeper znode移动到另一个节点（重命名）
- * 列出ZooKeeper znode的子节点
- * 创建znode（支持chroot）
+ * [版本](#版本)
+ * [状态](#状态)
+ * [健康检查](#健康检查)
+* [集合和内核](#集合和内核)
+ * [创建](#创建)
+ * [删除](#删除)
+* [ZooKeeper操作](#ZooKeeper操作)
+ * [上传配置集](#上传配置集)
+ * [下载配置集](#下载配置集)
+ * [在本地文件和ZooKeeper znode之间复制](#在本地文件和zooKeeper-znode之间复制)
+ * [从ZooKeeper中删除znode](#从ZooKeeper中删除znode)
+ * [将一个ZooKeeper znode移动到另一个节点（重命名）](#将一个zooKeeper-znode移动到另一个节点（重命名）)
+ * [列出ZooKeeper znode的子节点](#列出zooKeeper-znode的子节点)
+ * [创建znode（支持chroot）](#创建znode（支持chroot）)
  
 # 启动和停止
 ## 启动和重新启动
