@@ -44,17 +44,19 @@ bin/solr restart -help
 
 |参数|描述|示例|
 |---|---|----|
-|-a|使用其他JVM参数（例如以-X开头的那些参数）启动Solr。如果传递以“-D”开头的JVM参数，则可以省略-a选项。|bin/solr start -a "-Xdebug -Xrunjdwp:transport=dt_socket, server=y,suspend=n,address=1044"|
-|-cloud|在SolrCloud模式下启动Solr，它还将启动Solr附带的嵌入式ZooKeeper实例<br>此选项可以简化为-c。|bin/solr start -c|
-||||
-||||
-||||
-||||
-||||
-||||
-||||
-||||
-||||
+|`-a "<string>"`|使用其他JVM参数（例如以-X开头的那些参数）启动Solr。如果传递以“-D”开头的JVM参数，则可以省略-a选项。|`bin/solr start -a "-Xdebug -Xrunjdwp:transport=dt_socket, server=y,suspend=n,address=1044"`|
+|`-cloud`|在SolrCloud模式下启动Solr，它还将启动Solr附带的嵌入式ZooKeeper实例<br>此选项可以简化为-c。<br>如果你已经运行了要使用的ZooKeeper集合而不是嵌入式（单节点）ZooKeeper，则还应该传递-z参数。|`bin/solr start -c`|
+|`-d <dir>`|定义服务器目录，默认为server（如$SOLR_HOME/server）。自定义此选项是不常见的。当在同一主机上运行多个Solr实例时，更常见的是为每个实例使用相同的服务器目录，并使用-s选项使用唯一的Solr主目录。|`bin/solr start -d newServerDir`|
+|`-e <name>`|使用示例配置启动Solr。提供这些示例是为了帮助你更快地开始使用Solr，或者只尝试一个特定的功能。<br>可用的选项有：cloud、techproducts、dih和schemaless|`bin/solr start -e schemaless`|
+|`-f`|在前台启动Solr；当使用-e选项运行示例时，不能使用此选项。|`bin/solr start -f`|
+|`-h <hostname>`|使用定义的主机名启动Solr。如果未指定此参数，则将假定为“localhost”。|`bin/solr start -h search.mysolr.com`|
+|`-m <memory>`|使用定义的值作为JVM的最小（-Xms）和最大（-Xmx）堆大小启动Solr。|`bin/solr start -m 1g`|
+|`-noprompt`|启动Solr并禁止使用其他选项可能看到的任何提示，这将具有隐含地接受所有默认值的副作用。<br>例如，当使用“cloud”示例时，交互式会话将引导你完成SolrCloud群集的几个选项。如果要接受所有默认值，你只需向你的请求中添加-noprompt选项即可。|`bin/solr start -e cloud -noprompt`|
+|`-p <port>`|在定义的端口上启动Solr。如果未指定，将使用“8983”。|`bin/solr start -p 8655`|
+|`-s <dir>`|设置solr.solr.home系统属性；Solr将在此目录下创建核心目录。这允许你在同一主机上运行多个Solr实例，同时使用-d参数重用相同的服务器目录集。如果设置，指定的目录应该包含solr.xml文件，除非ZooKeeper中存在solr.xml。默认值为 `server/solr`。<br>运行示例（-e）时，将忽略此参数，因为solr.solr.home取决于运行的示例。|`bin/solr start -s newHome`|
+|`-v`|更详细的日志输出。这会将log4j的日志记录级别从INFO更改为DEBUG，与你相应地编辑log4j.properties具有相同的效果。|`bin/solr start -f -v`|
+|`-z <zkHost>`|使用定义的ZooKeeper连接字符串启动Solr。此选项仅与-c选项一起使用，以在SolrCloud模式下启动Solr。如果未提供此选项，Solr将启动嵌入式ZooKeeper实例，并将该实例用于SolrCloud操作。|`bin/solr start -c -z server1:2181,server2:2181`|
+|`-force`|如果尝试以root用户身份启动Solr，脚本将退出并显示一条警告，指出运行Solr作为“root”可能会导致问题。可以使用-force参数覆盖此警告。|`sudo bin/solr start -force`|
 
 ### 设置Java系统属性
 
