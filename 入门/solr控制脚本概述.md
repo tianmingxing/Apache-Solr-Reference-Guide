@@ -130,8 +130,54 @@ bin/solr stop -help
 |`-k <key>`|停止键用于保护不会意外停止Solr;默认为“solrrocks”。|`bin/solr stop -k solrrocks`|
 
 # 系统信息
+
 ## 版本
+
+version命令简单地返回当前安装的Solr的版本，并立即存在。
+
+```
+$ bin/solr version
+X.Y.0
+```
+
 ## 状态
+
+status命令显示在本地系统上找到的任何Solr节点的基本信息，以JSON格式显示出来。status命令使用 `SOLR_PID_DIR` 环境变量来查找Solr进程ID文件以查找运行的Solr实例；`SOLR_PID_DIR` 变量默认为bin目录。
+
+```
+bin/solr status
+```
+
+输出将包括集群的每个节点的状态，如本示例中所示：
+
+```
+Found 2 Solr nodes:
+ 
+Solr process 39920 running on port 7574
+{
+  "solr_home":"/Applications/Solr/example/cloud/node2/solr/",
+  "version":"X.Y.0",
+  "startTime":"2015-02-10T17:19:54.739Z",
+  "uptime":"1 days, 23 hours, 55 minutes, 48 seconds",
+  "memory":"77.2 MB (%15.7) of 490.7 MB",
+  "cloud":{
+    "ZooKeeper":"localhost:9865",
+    "liveNodes":"2",
+    "collections":"2"}}
+ 
+Solr process 39827 running on port 8865
+{
+  "solr_home":"/Applications/Solr/example/cloud/node1/solr/",
+  "version":"X.Y.0",
+  "startTime":"2015-02-10T17:19:49.057Z",
+  "uptime":"1 days, 23 hours, 55 minutes, 54 seconds",
+  "memory":"94.2 MB (%19.2) of 490.7 MB",
+  "cloud":{
+    "ZooKeeper":"localhost:9865",
+    "liveNodes":"2",
+    "collections":"2"}}
+```
+
 ## 健康检查
 # 集合和内核
 ## 创建
