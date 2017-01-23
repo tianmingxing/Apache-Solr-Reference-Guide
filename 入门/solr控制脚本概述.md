@@ -87,7 +87,9 @@ bin/solr start -cloud
 
 如果指定ZooKeeper连接（如-z 192.168.1.4:2181），则Solr将连接到ZooKeeper并加入集群。如果在"cloud"模式下启动Solr时未指定-z选项，则Solr将启动一个嵌入式ZooKeeper服务器，监听Solr端口 + 1000，如果Solr在端口8983上运行，则嵌入式ZooKeeper将在端口9983上监听。
 
-在SolrCloud模式下启动时，交互式脚本会话将提示你选择要使用的配置集。
+> 重要：如果你的ZooKeeper连接使用chroot，例如 `localhost:2181/solr`，则需要在使用 `bin/solr` 脚本启动SolrCloud之前创建 `/solr` znode。为此，使用下面概述的“mkroot”命令，例如：`bin/solr zk mkroot /solr -z 192.168.1.4:2181`。
+
+在SolrCloud模式下启动时，交互式脚本会话将提示你选择要使用的配置项。
 
 ### 使用示例配置运行
 
@@ -97,12 +99,33 @@ bin/solr start -e <name>
 
 示例配置允许你快速入门，以反映你希望使用Solr完成的配置。
 
-每个示例使用托管模式启动Solr，这允许使用Schema API进行模式编辑，但不允许手动编辑模式文件如果您希望直接手动修改schema.xml文件，您可以按照SolrConfig中的模式工厂定义部分中所述更改此默认值。
+每个示例使用托管模式启动Solr，这允许使用Schema API进行schema编辑，但不允许手动编辑schema文件如果你希望直接手动修改 `schema.xml` 文件，可以按照本节中所述更改此默认值 `Schema Factory Definition in SolrConfig`。
 
-除非在下面的描述中另有说明，示例不启用SolrCloud也不启用无模式模式。
+除非在下面的描述中另有说明，示例不启用SolrCloud也不启用 `Schemaless Mode`。
 
+下面是安装包自带的例子：
+
+* **cloud** 此示例在单台计算机上启动1-4个节点的SolrCloud群集。选择此项时，交互式会话将开始指导你选择要使用的初始配置项，你的示例集群的节点数、要使用的端口以及要创建的集合名称。使用此示例时，你可以从 `$SOLR_HOME/server/solr/configsets` 目录中找到相关可用配置文件。
+* **techproducts** 此示例以单机模式启动Solr，它是以 `$SOLR_HOME/example/exampledocs` 目录中的示例文档设计的模式启动。所使用的配置项可以在 `$ SOLR_HOME/server/solr/configsets/sample_techproducts_configs` 中找到。
+* **dih** 此示例在启用DataImportHandler（DIH）的单机模式下启动Solr，并为DIH支持的不同类型的数据（例如数据库内容、电子邮件和RSS订阅源等）预先配置了几个示例dataconfig.xml文件。所使用的配置集是为DIH定制的，可在 `$SOLR_HOME/example/example-DIH/solr/conf` 中找到。
+* **schemaless** 本示例使用托管模式在单机模式下启动Solr，如SolrConfig中的“Schema Factory Definition in SolrConfig”部分所述，并提供了非常小的预定义模式。Solr将以这种配置在“Schemaless Mode”中运行，其中Solr将在模式中即时创建字段，并猜测传入文档中使用的字段类型。所使用的配置项可以在 `$SOLR_HOME/server/solr/configsets/data_driven_schema_configs` 中找到。
+
+> 注意：运行in-foreground选项（-f）与-e选项不兼容，因为脚本需要在启动Solr服务器后执行其他任务。
 
 ## 停止
+
+stop命令向正在运行的Solr节点发送STOP请求，从而允许它正常关闭。该命令将等待5秒钟，如果Solr仍然未正常停止，则将强制杀死进程（kill -9）。
+
+```
+bin/solr stop [options]
+bin/solr stop -help
+```
+
+### 可用参数
+
+
+
+
 # 系统信息
 ## 版本
 ## 状态
