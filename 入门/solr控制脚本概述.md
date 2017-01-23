@@ -247,9 +247,34 @@ $ bin/solr healthcheck -c gettingstarted -z localhost:9865
 
 # 集合和内核
 
-
+`bin/solr` 脚本还可以帮助你创建新集合（在SolrCloud模式下）或核心（在单机模式下），或删除集合。
 
 ## 创建
+
+create命令检测Solr运行的模式（单击或SolrCloud），然后根据模式创建核心或集合。
+
+```
+bin/solr create [options]
+bin/solr create -help
+```
+### 可用参数
+
+|参数|描述|示例|
+|----|-----|-----|
+|`-c <name>`|要创建的核心或集合的名称（必需）。|`bin/solr create -c mycollection`|
+|`-d <confdir>`|配置目录。默认为data_driven_schema_configs。|`bin/solr create -d basic_configs`|
+|`-n <configName>`|配置名称。此默认值与核心或集合的名称相同。|`bin/solr create -n basic`|
+|`-p <port>`|本地Solr实例的端口发送create命令；默认情况下，脚本尝试通过查找正在运行的Solr实例来检测端口。<br>如果您在同一主机上运行多个独立的Solr实例，则此选项很有用，因此需要您具体说明创建核心的实例。|`bin/solr create -p 8983`|
+|`-s <shards>`<br>`-shards`|拆分集合的分片数，默认为1;仅适用于Solr在SolrCloud模式下运行时。|`bin/solr create -s 2`|
+|`-rf <replicas>`<br>`-replicationFactor`|集合中每个文档的副本数。默认值为1（无复制）。|`bin/solr create -rf 2`|
+|`-force`|如果用root用户尝试运行create，则脚本将退出并显示一条警告，指出运行Solr或针对Solr的操作为“root”可能会导致问题。可以使用-force参数覆盖此警告。|`bin/solr create -c foo -force`|
+
+### 配置目录和SolrCloud
+
+
+### 数据驱动架构和共享配置
+
+
 ## 删除
 # ZooKeeper操作
 ## 上传配置集
