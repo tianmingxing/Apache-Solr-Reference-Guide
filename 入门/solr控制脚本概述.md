@@ -123,8 +123,11 @@ bin/solr stop -help
 
 ### 可用参数
 
-
-
+|参数|描述|示例|
+|-----|-----|------|
+|`-p <port>`|停止在指定端口上运行的Solr进程。如果运行多个实例或以SolrCloud模式运行，则需要在单独的请求中指定端口或使用-all选项。|`bin/solr stop -p 8983`|
+|`-all`|停止所有运行的具有有效PID的Solr实例。|`停止所有运行的具有有效PID的Solr实例。`|
+|`-k <key>`|停止键用于保护不会意外停止Solr;默认为“solrrocks”。|`bin/solr stop -k solrrocks`|
 
 # 系统信息
 ## 版本
