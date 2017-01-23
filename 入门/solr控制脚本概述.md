@@ -179,7 +179,76 @@ Solr process 39827 running on port 8865
 ```
 
 ## 健康检查
+
+healthcheck命令在以SolrCloud模式运行时为集合生成JSON格式的运行状况报告。运行状况报告提供有关集合中所有分片的每个副本的状态的信息，包括已提交文档的数量及其当前状态。
+
+```
+bin/solr healthcheck [options]
+bin/solr healthcheck -help
+```
+
+### 可用参数
+
+|参数|描述|示例|
+|-----|----|----|
+|`-c <collection>`|针对（必需）运行healthcheck的集合的名称。|`bin/solr healthcheck -c gettingstarted`|
+|`-z <zkhost>`|ZooKeeper连接默认为 `localhost:9983`。如果你在除8983之外的端口上运行Solr，则必须指定ZooKeeper连接信息。|`bin/solr healthcheck -z localhost:2181`|
+
+下面是使用非标准ZooKeeper连接的健康检查请求和响应示例，运行2个节点：
+
+```
+$ bin/solr healthcheck -c gettingstarted -z localhost:9865
+ 
+{
+  "collection":"gettingstarted",
+  "status":"healthy",
+  "numDocs":0,
+  "numShards":2,
+  "shards":[
+    {
+      "shard":"shard1",
+      "status":"healthy",
+      "replicas":[
+        {
+          "name":"core_node1",
+          "url":"http://10.0.1.10:8865/solr/gettingstarted_shard1_replica2/",
+          "numDocs":0,
+          "status":"active",
+          "uptime":"2 days, 1 hours, 18 minutes, 48 seconds",
+          "memory":"25.6 MB (%5.2) of 490.7 MB",
+          "leader":true},
+        {
+          "name":"core_node4",
+          "url":"http://10.0.1.10:7574/solr/gettingstarted_shard1_replica1/",
+          "numDocs":0,
+          "status":"active",
+          "uptime":"2 days, 1 hours, 18 minutes, 42 seconds",
+          "memory":"95.3 MB (%19.4) of 490.7 MB"}]},
+    {
+      "shard":"shard2",
+      "status":"healthy",
+      "replicas":[
+        {
+          "name":"core_node2",
+          "url":"http://10.0.1.10:8865/solr/gettingstarted_shard2_replica2/",
+          "numDocs":0,
+          "status":"active",
+          "uptime":"2 days, 1 hours, 18 minutes, 48 seconds",
+          "memory":"25.8 MB (%5.3) of 490.7 MB"},
+        {
+          "name":"core_node3",
+          "url":"http://10.0.1.10:7574/solr/gettingstarted_shard2_replica1/",
+          "numDocs":0,
+          "status":"active",
+          "uptime":"2 days, 1 hours, 18 minutes, 42 seconds",
+          "memory":"95.4 MB (%19.4) of 490.7 MB",
+          "leader":true}]}]}
+```
+
 # 集合和内核
+
+
+
 ## 创建
 ## 删除
 # ZooKeeper操作
