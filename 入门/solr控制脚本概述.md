@@ -55,15 +55,51 @@ bin/solr restart -help
 |`-p <port>`|在定义的端口上启动Solr。如果未指定，将使用“8983”。|`bin/solr start -p 8655`|
 |`-s <dir>`|设置solr.solr.home系统属性；Solr将在此目录下创建核心目录。这允许你在同一主机上运行多个Solr实例，同时使用-d参数重用相同的服务器目录集。如果设置，指定的目录应该包含solr.xml文件，除非ZooKeeper中存在solr.xml。默认值为 `server/solr`。<br>运行示例（-e）时，将忽略此参数，因为solr.solr.home取决于运行的示例。|`bin/solr start -s newHome`|
 |`-v`|更详细的日志输出。这会将log4j的日志记录级别从INFO更改为DEBUG，与你相应地编辑log4j.properties具有相同的效果。|`bin/solr start -f -v`|
-|`-z <zkHost>`|使用定义的ZooKeeper连接字符串启动Solr。此选项仅与-c选项一起使用，以在SolrCloud模式下启动Solr。如果未提供此选项，Solr将启动嵌入式ZooKeeper实例，并将该实例用于SolrCloud操作。|`bin/solr start -c -z server1:2181,server2:2181`|
+|`-z <zkHost>`|使用定义的ZooKeeper连接启动Solr。此选项仅与-c选项一起使用，以在SolrCloud模式下启动Solr。如果未提供此选项，Solr将启动嵌入式ZooKeeper实例，并将该实例用于SolrCloud操作。|`bin/solr start -c -z server1:2181,server2:2181`|
 |`-force`|如果尝试以root用户身份启动Solr，脚本将退出并显示一条警告，指出运行Solr作为“root”可能会导致问题。可以使用-force参数覆盖此警告。|`sudo bin/solr start -force`|
+
+To emphasize how the default settings work take a moment to understand that the following commands are equivalent:
+（译者注：下面两条语句执行的结果是相同，像第一条语句不指定参数则默认第二条语句的那些参数）
+
+```
+bin/solr start
+bin/solr start -h localhost -p 8983 -d server -s solr -m 512m
+```
+
+如果默认值适合你的需要，则不需要在启动时定义所有选项。
 
 ### 设置Java系统属性
 
+`bin/solr` 脚本将以-D开头的任何其他参数传递给JVM，这允许你设置任意的Java系统属性。例如，要将 `autoSoftCommit` 提交频率设置为3秒，你可以：
+
+```
+bin/solr start -Dsolr.autoSoftCommit.maxTime=3000
+```
+
 ### SolrCloud模式
 
+-c和-cloud选项是等效的：
+
+```
+bin/solr start -c
+bin/solr start -cloud
+```
+
+如果指定ZooKeeper连接（如-z 192.168.1.4:2181），则Solr将连接到ZooKeeper并加入集群。如果在"cloud"模式下启动Solr时未指定-z选项，则Solr将启动一个嵌入式ZooKeeper服务器，监听Solr端口 + 1000，如果Solr在端口8983上运行，则嵌入式ZooKeeper将在端口9983上监听。
+
+在SolrCloud模式下启动时，交互式脚本会话将提示你选择要使用的配置集。
 
 ### 使用示例配置运行
+
+```
+bin/solr start -e <name>
+```
+
+示例配置允许你快速入门，以反映你希望使用Solr完成的配置。
+
+每个示例使用托管模式启动Solr，这允许使用Schema API进行模式编辑，但不允许手动编辑模式文件如果您希望直接手动修改schema.xml文件，您可以按照SolrConfig中的模式工厂定义部分中所述更改此默认值。
+
+除非在下面的描述中另有说明，示例不启用SolrCloud也不启用无模式模式。
 
 
 ## 停止
