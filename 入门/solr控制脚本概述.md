@@ -271,6 +271,9 @@ bin/solr create -help
 
 ### 配置目录和SolrCloud
 
+在SolrCloud中创建集合之前，集合使用的配置目录必须上传到ZooKeeper。 create命令支持如何使用集合和配置目录工作的多个用例。你需要做的主要决定是在ZooKeeper中的配置目录是否应该在多个集合之间共享。让我们通过几个例子来说明配置目录在SolrCloud中如何工作。
+
+
 
 ### 数据驱动架构和共享配置
 
