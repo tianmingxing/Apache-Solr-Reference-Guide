@@ -283,8 +283,27 @@ bin/solr create -help
 
 ### 数据驱动架构和共享配置
 
+当数据被索引时data_driven_schema_configs的schema可以改变。因此，我们建议你不要在集合之间共享数据驱动配置，除非你确定所有集合都应该继承将数据索引到其中一个集合时所做的更改。
 
 ## 删除
+
+delete命令检测Solr运行的模式（单机或SolrCloud），然后根据需要删除指定的核心（单机）或集合（SolrCloud）。
+
+```
+bin/solr delete [options]
+bin/solr delete -help
+```
+
+如果在SolrCloud模式下运行，delete命令将检查你要删除的集合所使用的配置目录是否被其他集合使用。如果没有，那么配置目录也会从ZooKeeper中删除。例如，如果你通过执行创建集合 `bin/solr create -c contacts`，然后删除命令 `bin/solr delete -c contacts` 将检查 `/configs/contacts` 配置目录是否被任何其他集合使用。如果没有，那么 `/configs/contacts` 目录从ZooKeeper中删除。
+
+### 可用参数
+
+|参数|描述|示例|
+|----|-----|-----|
+|`-c <name>`|要删除的核心或集合的名称（必需）。|`bin/solr delete -c mycoll`|
+|`-deleteConfig <true或false>`|从ZooKeeper中删除配置目录。默认值为true。<br>如果配置目录正在被另一个集合使用，即使你将-deleteConfig设置为true，它也不会被删除。|`bin/solr delete -deleteConfig false`|
+|`-p <port>`|要向其发送delete命令的本地Solr实例的端口。默认情况下，脚本尝试通过查找运行的Solr实例来检测端口。<br>如果你在同一主机上运行多个独立的Solr实例，则此选项非常有用，因此需要你具体了解从哪个实例删除核心。|`bin/solr delete -p 8983`|
+
 # ZooKeeper操作
 ## 上传配置集
 ## 下载配置集
