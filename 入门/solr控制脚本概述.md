@@ -273,7 +273,13 @@ bin/solr create -help
 
 在SolrCloud中创建集合之前，集合使用的配置目录必须上传到ZooKeeper。 create命令支持如何使用集合和配置目录工作的多个用例。你需要做的主要决定是在ZooKeeper中的配置目录是否应该在多个集合之间共享。让我们通过几个例子来说明配置目录在SolrCloud中如何工作。
 
+首先，如果不提供-d或-n选项，那么默认配置（$SOLR_HOME/server/solr/configsets/data_driven_schema_configs/conf）将使用与集合相同的名称并上传到ZooKeeper。例如，使用以下命令 ` bin/solr create -c contacts` 将导致 `data_driven_schema_configs` 配置上传到ZooKeeper的 `/configs/contacts` 中。如果创建另一个集合，通过执行 `bin/solr create -c contacts2`，`data_driven_schema_configs` 目录的另一个副本将被上传到ZooKeeper的 `/configs/contacts2` 下。对contacts集合的配置所做的任何更改都不会影响contacts2集合。简单地说，使用默认参数时服务会为你创建的每个集合创建唯一的配置目录。
 
+你可以使用-n选项覆盖ZooKeeper中配置目录默认的名称。例如，命令 `bin/solr create -c logs -d basic_configs -n basic` 将 `server/solr/configsets/basic_configs/conf` 目录上传到ZooKeeper的 `/configs/basic`。
+
+请注意，我们使用-d选项指定与默认值不同的配置。Solr在 `server/solr/configsets` 下提供了几个内置配置。但是，你也可以使用-d选项提供自己的配置目录路径。例如，命令 `bin/solr create -c mycoll -d /tmp/myconfigs`，将 `/tmp/myconfigs` 上传到ZooKeeper的 `/configs/mycoll` 下面。再一次提醒你的是：配置目录以集合命名，除非你使用-n选项覆盖它。
+
+其他集合可以通过使用-n选项指定共享配置的名称来共享相同的配置。例如，以下命令将以某个存在的基本配置来创建新的集合：`bin/solr create -c logs2 -n basic`。
 
 ### 数据驱动架构和共享配置
 
