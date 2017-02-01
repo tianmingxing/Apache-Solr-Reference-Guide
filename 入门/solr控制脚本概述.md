@@ -306,7 +306,12 @@ bin/solr delete -help
 
 # ZooKeeper操作
 
-`bin/solr` 脚本可以对ZooKeeper进行某些操作。
+`bin/solr` 脚本可以对ZooKeeper进行某些操作。这些操作仅适用于SolrCloud模式。操作作为子命令可用，每个子命令都有自己的选项集。
+
+```
+bin/solr zk [sub-command] [options]
+bin/solr zk -help
+```
 
 ## 上传配置集
 ## 下载配置集
