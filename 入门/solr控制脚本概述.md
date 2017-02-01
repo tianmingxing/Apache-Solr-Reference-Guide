@@ -333,8 +333,54 @@ bin/solr zk -help
 bin/solr zk upconfig -z 111.222.333.444:2181 -n mynewconfig -d /path/to/configset
 ```
 
+> **更改配置时重新加载集合**
+> 此命令不会自动使更改生效！它只是将配置集上传到ZooKeeper。你可以使用Collection API的RELOAD命令重新加载此配置集的任何集合。
+
 ## 下载配置集
+
+使用 `zk downconfig` 命令将配置集从ZooKeeper下载到本地文件系统。
+
+### 可用参数（所有参数都是必需的）
+
+|参数|描述|示例|
+|----|----|----|
+|`-n <name>`|ZooKeeper中下载的配置名称。进入后台管理页面Cloud -> Tree -> configs节点列出所有可用的配置集。|`-n myconfig`|
+|`-d <configset dir>`|将下载的配置集写入的路径。如果只提供一个名称，`$ SOLR_HOME/server/solr/configsets` 将是父级。也可以提供绝对路径。<br>_在任一情况下，目标上的预先存在的配置将被覆盖！_|`-d directory_under_configsets -d /path/to/configset/destination`|
+|`-z <zkHost>`|ZooKeeper连接信息。如果ZK_HOST在solr.in.sh或solr.in.cmd中定义，则不必要。|`-z 123.321.23.43:2181`|
+
+这些命令的一个例子，这些参数是：
+
+```
+bin/solr zk downconfig -z 111.222.333.444:2181 -n mynewconfig -d /path/to/configset
+```
+
+“最佳实践”是将你的配置集保存到某种形式的版本控制系统。在这种情况下，downconfig应该很少使用。
+
 ## 在本地文件和ZooKeeper znode之间复制
+
+使用 `zk cp` 命令在ZooKeeper znode和本地驱动器之间传输文件和目录。此命令将从本地驱动器复制到ZooKeeper，从ZooKeeper到本地驱动器或从ZooKeeper到ZooKeeper。
+
+### 可用参数
+
+|参数|描述|示例|
+|----|----|----|
+|`-r`|可选的。做递归复制。如果`<src>`有子节点，除非指定了“-r”，否则命令将失败。|`-r`|
+|`<src>`|要从中复制的文件或路径。如果前缀为zk：那么源被假定为ZooKeeper。如果没有前缀或前缀是file：，这表示是本地驱动器。`<src>`或`<dest>`中的至少一个必须以“zk：”作为前缀，否则命令将失败。|`zk:/configs/myconfigs/solrconfig.xml`<br>`file:/Users/apache/configs/src`|
+|`<dest>`|要复制到的文件或路径。如果前缀为zk：那么源被假定为ZooKeeper。如果没有前缀或前缀是file：，这表示是本地驱动器。`<src>`或`<dest>`中的至少一个必须以zk：开头，否则命令将失败。如果`<dest>`以斜杠字符结尾，它命名一个目录。|`zk:/configs/myconfigs/solrconfig.xml`<br>`file:/Users/apache/configs/src`|
+|`-z <zkHost>`|ZooKeeper连接信息。如果ZK_HOST在solr.in.sh或solr.in.cmd中定义，则不必要。|`-z 123.321.23.43:2181`|
+
+这些命令的一个例子，这些参数是：
+递归地将目录从本地复制到ZooKeeper。
+
+```
+bin/solr zk cp -r  file:/apache/confgs/whatever/conf zk:/configs/myconf -z 111.222.333.444:2181
+```
+
+将单个文件从ZooKeeper复制到本地。
+```
+bin/solr zk cp zk:/configs/myconf/managed_schema /configs/myconf/managed_schema -z 111.222.333.444:2181
+```
+
 ## 从ZooKeeper中删除znode
 ## 将一个ZooKeeper znode移动到另一个节点（重命名）
 ## 列出ZooKeeper znode的子节点
