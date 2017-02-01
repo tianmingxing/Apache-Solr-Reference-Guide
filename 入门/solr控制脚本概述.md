@@ -382,6 +382,17 @@ bin/solr zk cp zk:/configs/myconf/managed_schema /configs/myconf/managed_schema 
 ```
 
 ## 从ZooKeeper中删除znode
+
+使用 `zk rm` 命令从ZooKeeper中删除znode（所有可选子节点）
+
+### 可用参数
+
+|参数|描述|示例|
+|----|----|----|
+|`-r`||`-r`|
+|`<path>`||`/configs`<br>`/configs/myconfigset`<br>`/config/myconfigset/solrconfig.xml`|
+|`-z <zkHost>`||`-z 123.321.23.43:2181`|
+
 ## 将一个ZooKeeper znode移动到另一个节点（重命名）
 ## 列出ZooKeeper znode的子节点
 ## 创建znode（支持chroot）
