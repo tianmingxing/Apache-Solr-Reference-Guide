@@ -306,7 +306,7 @@ bin/solr delete -help
 
 # ZooKeeper操作
 
-`bin/solr` 脚本可以对ZooKeeper进行操作。
+`bin/solr` 脚本可以对ZooKeeper进行某些操作。
 
 ## 上传配置集
 ## 下载配置集
