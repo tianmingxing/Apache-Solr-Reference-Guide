@@ -313,7 +313,26 @@ bin/solr zk [sub-command] [options]
 bin/solr zk -help
 ```
 
+提示：Solr应该至少已经启动一次，然后发出这些命令来使用znode Solr预期来初始化ZooKeeper。一旦ZooKeeper初始化，Solr不需要在任何节点上运行就可以使用这些命令。
+
 ## 上传配置集
+
+使用zk upconfig命令将预配置的配置集或自定义配置集中的一个上传到ZooKeeper。
+
+### 可用参数（所有参数都是必需的）
+
+|参数|描述|示例|
+|-----|-----|------|
+|`-n <name>`|ZooKeeper中配置集的名称。此命令将上传配置集到“configs” ZooKeeper节点。|`-n myconfig`|
+|`-d <configset dir>`|配置设置为上传的路径。它应该有一个“conf”目录，紧接在它下面，依次包含solrconfig.xml等。<br>如果只提供一个名称，将会检查 `$SOLR_HOME/server/solr/configsets` 这个名称。可以填写绝对路径。|`-d directory_under_configsets -d /path/to/configset/source`|
+|`-z <zkHost>`|ZooKeeper连接信息。如果ZK_HOST有在solr.in.sh或solr.in.cmd中定义，则不必要。|`-z 123.321.23.43:2181`|
+
+这些命令的一个例子，这些参数是：
+
+```
+bin/solr zk upconfig -z 111.222.333.444:2181 -n mynewconfig -d /path/to/configset
+```
+
 ## 下载配置集
 ## 在本地文件和ZooKeeper znode之间复制
 ## 从ZooKeeper中删除znode
