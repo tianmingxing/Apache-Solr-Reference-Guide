@@ -305,6 +305,9 @@ bin/solr delete -help
 |`-p <port>`|要向其发送delete命令的本地Solr实例的端口。默认情况下，脚本尝试通过查找运行的Solr实例来检测端口。<br>如果你在同一主机上运行多个独立的Solr实例，则此选项非常有用，因此需要你具体了解从哪个实例删除核心。|`bin/solr delete -p 8983`|
 
 # ZooKeeper操作
+
+`bin/solr` 脚本可以对ZooKeeper进行操作。
+
 ## 上传配置集
 ## 下载配置集
 ## 在本地文件和ZooKeeper znode之间复制
