@@ -10,5 +10,12 @@
   * [Solr控制脚本概述](入门/solr控制脚本概述.md)
 * [从旧版本升级](从旧版本升级/README.md)
 * [使用Solr管理用户界面](使用Solr管理用户界面/使用Solr管理用户界面.md)
+  * [Solr管理页面概述](使用Solr管理用户界面/Solr管理页面概述.md)
+  * [获得帮助](使用Solr管理用户界面/获得帮助.md)
+  * [Logging页面](使用Solr管理用户界面/Logging页面.md)
+  * [Cloud页面](使用Solr管理用户界面/Cloud页面.md)
+  * [Collections/Core Admin页面](使用Solr管理用户界面/Collections-CoreAdmin页面.md)
+  * [Java Properties页面](使用Solr管理用户界面/Java-Properties页面.md)
+  * [Thread Dump页面](使用Solr管理用户界面/Thread-Dump页面.md)
 
 
