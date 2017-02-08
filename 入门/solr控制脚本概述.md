@@ -327,7 +327,7 @@ bin/solr zk -help
 |`-d <configset dir>`|配置设置为上传的路径。它应该有一个“conf”目录，紧接在它下面，依次包含solrconfig.xml等。<br>如果只提供一个名称，将会检查 `$SOLR_HOME/server/solr/configsets` 这个名称。可以填写绝对路径。|`-d directory_under_configsets -d /path/to/configset/source`|
 |`-z <zkHost>`|ZooKeeper连接信息。如果ZK_HOST有在solr.in.sh或solr.in.cmd中定义，则不必要。|`-z 123.321.23.43:2181`|
 
-这些命令的一个例子，这些参数是：
+此命令的示例是：
 
 ```
 bin/solr zk upconfig -z 111.222.333.444:2181 -n mynewconfig -d /path/to/configset
@@ -348,7 +348,7 @@ bin/solr zk upconfig -z 111.222.333.444:2181 -n mynewconfig -d /path/to/configse
 |`-d <configset dir>`|将下载的配置集写入的路径。如果只提供一个名称，`$ SOLR_HOME/server/solr/configsets` 将是父级。也可以提供绝对路径。<br>_在任一情况下，目标上的预先存在的配置将被覆盖！_|`-d directory_under_configsets -d /path/to/configset/destination`|
 |`-z <zkHost>`|ZooKeeper连接信息。如果ZK_HOST在solr.in.sh或solr.in.cmd中定义，则不必要。|`-z 123.321.23.43:2181`|
 
-这些命令的一个例子，这些参数是：
+此命令的示例是：
 
 ```
 bin/solr zk downconfig -z 111.222.333.444:2181 -n mynewconfig -d /path/to/configset
@@ -369,7 +369,8 @@ bin/solr zk downconfig -z 111.222.333.444:2181 -n mynewconfig -d /path/to/config
 |`<dest>`|要复制到的文件或路径。如果前缀为zk：那么源被假定为ZooKeeper。如果没有前缀或前缀是file：，这表示是本地驱动器。`<src>`或`<dest>`中的至少一个必须以zk：开头，否则命令将失败。如果`<dest>`以斜杠字符结尾，它命名一个目录。|`zk:/configs/myconfigs/solrconfig.xml`<br>`file:/Users/apache/configs/src`|
 |`-z <zkHost>`|ZooKeeper连接信息。如果ZK_HOST在solr.in.sh或solr.in.cmd中定义，则不必要。|`-z 123.321.23.43:2181`|
 
-这些命令的一个例子，这些参数是：
+此命令的示例是：
+
 递归地将目录从本地复制到ZooKeeper。
 
 ```
@@ -389,10 +390,68 @@ bin/solr zk cp zk:/configs/myconf/managed_schema /configs/myconf/managed_schema 
 
 |参数|描述|示例|
 |----|----|----|
-|`-r`||`-r`|
-|`<path>`||`/configs`<br>`/configs/myconfigset`<br>`/config/myconfigset/solrconfig.xml`|
-|`-z <zkHost>`||`-z 123.321.23.43:2181`|
+|`-r`|可选的。执行递归删除。如果 `<path>` 有子节点，除非指定了“-r”，否则命令将失败。|`-r`|
+|`<path>`|从ZooKeeper（父节点或子节点）删除的路径。<br>有限的安全检查，你不能删除'/'或'/zookeeper'节点。<br>该路径假定为ZooKeeper节点，不需要zk:前缀。|`/configs`<br>`/configs/myconfigset`<br>`/config/myconfigset/solrconfig.xml`|
+|`-z <zkHost>`|ZooKeeper连接信息。如果ZK_HOST在solr.in.sh或solr.in.cmd中定义，则不必要。|`-z 123.321.23.43:2181`|
+
+此命令的示例是：
+
+```
+bin/solr zk rm -r /configs
+bin/solr zk rm /configs/myconfigset/schema.xml
+```
 
 ## 将一个ZooKeeper znode移动到另一个节点（重命名）
+
+使用 `zk mv` 命令移动（重命名）ZooKeeper znode
+
+### 可用参数
+
+|参数|描述|示例|
+|----|----|----|
+|`<src>`|要重命名的znode。假定zk:前缀。|`/configs/oldconfigset`|
+|`<dest>`|znode的新名称。假定zk:前缀。|`/configs/newconfigset`|
+|`-z <zkHost>`|ZooKeeper连接信息。如果ZK_HOST在solr.in.sh或solr.in.cmd中定义，则不必要。|`-z 123.321.23.43:2181`|
+
+此命令的示例是：
+
+```
+bin/solr zk mv /configs/oldconfigset /configs/newconfigset
+```
+
 ## 列出ZooKeeper znode的子节点
+
+使用 `zk ls` 命令查看znode的子节点。
+
+### 可用参数
+
+|参数|描述|示例|
+|----|----|----|
+|`-r`|可选。递归列出znode的所有后代。|`-r`|
+|`<path>`|ZooKeeper上的路径列表。|`/collections/mycollection`|
+|`-z <zkHost>`|ZooKeeper连接信息。如果ZK_HOST在solr.in.sh或solr.in.cmd中定义，则不必要。|`-z 123.321.23.43:2181`|
+
+此命令的示例是：
+
+```
+bin/solr zk ls -r /collections/mycollection
+bin/solr zk ls /collections
+```
+
 ## 创建znode（支持chroot）
+
+使用zk mkroot命令创建znode。这个命令的主要用来支持ZooKeeper的“chroot”概念。但是它也可以用于创建任意路径。
+
+### 可用参数
+
+|参数|描述|示例|
+|----|----|----|
+|`<path>`|ZooKeeper创建的路径。如果需要将创建中间znode。即使未指定，也将使用前导斜杠。|`/solr`|
+|`-z <zkHost>`|ZooKeeper连接信息。如果ZK_HOST在solr.in.sh或solr.in.cmd中定义，则不必要。|`-z 123.321.23.43:2181`|
+
+此命令的示例是：
+
+```
+bin/solr zk mkroot /solr -z 123.321.23.43:2181 
+bin/solr zk mkroot /solr/production
+```
