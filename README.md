@@ -6,7 +6,7 @@
 
 ### 如何来阅读
 
-* [点击在线阅读](https://xiaoxing598.gitbooks.io/apache-solr-reference-guide/content/)
+* [点击在线阅读](https://xiaoxing598.gitbooks.io/apache-solr-reference-guide/content/)，由于GitBook将文档缓存在客户端时间较长，造成新翻译的章节并不能立即查询出来，此时你可以强制刷新浏览器。
 * [文档托管在GitHub](https://github.com/xiaoxing598/Apache-Solr-Reference-Guide)
 
 ### 为什么要做这个事情
@@ -21,8 +21,8 @@
 
 单枪匹马只能开个头，真正把这个事情做成，还需要各位的积极参与。大家一起参与进来把这个事情完成，我觉得是件非常有意思的事情。
 
-* 你可以加群（329232140）与我们联系，这是一个不错的Java学习交流群。
-* 你也可以直接发邮件（mx.tian@qq.com）给我
+* 你可以加群（**329232140**）与我们联系，这是一个非常不错的Java架构师学习交流群；
+* 你也可以直接发邮件（mx.tian@qq.com）与我沟通。
 
 ### 参与人员（热心群众）
 
