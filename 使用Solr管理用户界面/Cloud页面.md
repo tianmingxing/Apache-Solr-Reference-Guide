@@ -1,0 +1,1 @@
+在SolrCloud模式下运行时，“Logging”和“Collections/Core Admin”之间的管理界面中将显示一个“Cloud”菜单，其中提供有关集群中每个集合和节点的状态信息，以及访问存储在Zookeeper中的低级数据。
