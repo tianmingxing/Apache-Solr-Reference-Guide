@@ -17,3 +17,4 @@
 
 ![](/assets/cloud-tree.png)
 
+最后一个选项是“Dump”，它返回一个JSON文档，其中包含所有节点，它们的内容和子节点（递归）。这可以用于导出Solr保存在ZooKeeper中的所有数据的快照，并且可以帮助调试SolrCloud问题。
