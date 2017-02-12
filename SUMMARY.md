@@ -17,5 +17,13 @@
   * [Collections/Core Admin页面](使用Solr管理用户界面/Collections-CoreAdmin页面.md)
   * [Java Properties页面](使用Solr管理用户界面/Java-Properties页面.md)
   * [Thread Dump页面](使用Solr管理用户界面/Thread-Dump页面.md)
+  * [集合特定工具](使用Solr管理用户界面/集合特定工具/集合特定工具.md)
+    * [Analysis页面](使用Solr管理用户界面/集合特定工具/Analysis页面.md)
+    * [Dataimport页面](使用Solr管理用户界面/集合特定工具/Dataimport页面.md)
+    * [Documents页面](使用Solr管理用户界面/集合特定工具/Documents页面.md)
+    * [Query页面](使用Solr管理用户界面/集合特定工具/Query页面.md)
+    * [Stream页面](使用Solr管理用户界面/集合特定工具/Stream页面.md)
+    * [Schema Browser页面](使用Solr管理用户界面/集合特定工具/Schema-Browser页面.md)
+
 
 
