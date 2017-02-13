@@ -21,6 +21,7 @@
     * [Analysis页面](使用Solr管理用户界面/集合特定工具/Analysis页面.md)
     * [Dataimport页面](使用Solr管理用户界面/集合特定工具/Dataimport页面.md)
     * [Documents页面](使用Solr管理用户界面/集合特定工具/Documents页面.md)
+    * [Files页面](使用Solr管理用户界面/集合特定工具/Files页面.md)
     * [Query页面](使用Solr管理用户界面/集合特定工具/Query页面.md)
     * [Stream页面](使用Solr管理用户界面/集合特定工具/Stream页面.md)
     * [Schema Browser页面](使用Solr管理用户界面/集合特定工具/Schema-Browser页面.md)
