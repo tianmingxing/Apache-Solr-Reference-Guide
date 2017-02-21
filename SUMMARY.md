@@ -25,6 +25,10 @@
     * [Query页面](使用Solr管理用户界面/集合特定工具/Query页面.md)
     * [Stream页面](使用Solr管理用户界面/集合特定工具/Stream页面.md)
     * [Schema Browser页面](使用Solr管理用户界面/集合特定工具/Schema-Browser页面.md)
+  * [核心特定工具](使用Solr管理用户界面/核心特定工具/核心特定工具.md)
+    * [Ping](使用Solr管理用户界面/核心特定工具/ping.md)
+    * [插件和状态](使用Solr管理用户界面/核心特定工具/plugins-stats.md)
+    * [分段信息](使用Solr管理用户界面/核心特定工具/replication.md)
 
 
 
