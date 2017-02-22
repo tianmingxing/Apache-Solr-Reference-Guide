@@ -27,6 +27,6 @@
     * [Schema Browser页面](使用Solr管理用户界面/集合特定工具/Schema-Browser页面.md)
   * [核心特定工具](使用Solr管理用户界面/核心特定工具/核心特定工具.md)
     * [Ping页面](使用Solr管理用户界面/核心特定工具/ping.md)
-    * [插件和状态页面](使用Solr管理用户界面/核心特定工具/plugins-stats.md)
-    * [分段信息页面](使用Solr管理用户界面/核心特定工具/replication.md)
+    * [Plugins & Stats页面](使用Solr管理用户界面/核心特定工具/plugins-stats.md)
+    * [Replication页面](使用Solr管理用户界面/核心特定工具/replication.md)
 
