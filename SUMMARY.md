@@ -29,4 +29,5 @@
     * [Ping页面](使用Solr管理用户界面/核心特定工具/ping.md)
     * [Plugins & Stats页面](使用Solr管理用户界面/核心特定工具/plugins-stats.md)
     * [Replication页面](使用Solr管理用户界面/核心特定工具/replication.md)
+    * [Segments Info页面](使用Solr管理用户界面/核心特定工具/segments-info.md)
 
